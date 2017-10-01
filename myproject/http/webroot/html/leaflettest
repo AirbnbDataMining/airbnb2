@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- <title>Node.js Web Server</title>
+<head>
+<link rel="stylesheet" href="../css/leaflet.css"/>
+<script src="../js/leaflet.js"/>
+<style type="text/css">
+#mapid { height: 180px; }
+</style>
+</head>
+<body>
+
+
+<svg width="960" height="500"></svg>
+<div id="mapid"></div>
+
+
+
+
+
+</body>
+<script type="text/javascript">
+var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+
+let street = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoieXVueW91IiwiYSI6ImNpczg2aDh0NTAwMzkyeXA3MXU3YjMxeGcifQ.z-j7gq3uS7yQ2CCjiaIp1g ', {maxZoom: 18,
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org ">OpenStreetMap</a> contributors, ' +
+        '<a href="http://creativecommons.org/licenses/by-sa/2.0/ ">CC-BY-SA</a>, ' +
+        'Imagery  <a href="http://mapbox.com ">Mapbox</a>',id: 'mapbox.dark'});
+
+street.addTo(mymap);
+
+</script>
+
+
+</script> -->
+</html>

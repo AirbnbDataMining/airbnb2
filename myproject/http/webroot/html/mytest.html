@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta />
+<title>Node.js Web Server</title>
+
+<style type="text/css">
+
+.axis--x path {
+  display: none;}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+
+</style>
+
+<script src="../js/d3.js"></script>
+
+</head>
+
+<body>
+<svg width="960" height="500"></svg>
+
+</body>
+<script type="text/javascript">
+
+// printAge(obj)
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 80, bottom: 30, left: 50},
+    width = svg.attr("width") - margin.left - margin.right,
+    height = svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var dataset = [[52.36117305,4.866754582,100],
+               [52.37023656,4.859506674,96],
+               [52.36201576,4.86687246,80],
+               [52.36582593,4.858177973,61]];
+var maxvalue = d3.max(dataset,function(d){return d[2]});
+var minvalue = d3.min(dataset,function(d){return d[2]});
+
+
+var xScale = d3.scaleLinear()
+               .domain([d3.min(dataset,function(d){return d[0]}),d3.max(dataset,function(d){return d[0]})])
+               .range([0, width]),
+    yScale = d3.scaleLinear()
+               .domain([d3.min(dataset,function(d){return d[1]}),d3.max(dataset,function(d){return d[1]})])
+               .range([height, 0]);
+   
+
+var circle = svg.selectAll(".myCircle")
+                .data(dataset)
+                .enter()
+                .append("circle")
+                .attr("cx",function(d){return margin.left + xScale(d[0])})
+                .attr("cy",function(d){return height - margin.bottom - yScale(d[1])})
+                .attr("fill",d3.rgb(120,function(d){return (d[2]-minvalue)/(maxvalue-minvalue)},function(d){return (d[2]-minvalue)/(maxvalue-minvalue)}))
+                .attr("r",5)
+                .attr("class","myCircle");
+/*
+
+var xAxis = d3.axisBottom()
+              .scale(xScale);
+              
+
+var yAxis = d3.axisLeft()
+              .scale(yScale);
+
+svg.append("g")
+  .attr("class","axis")
+  .attr("transform","translate("+ margin.left + ","  + (height - margin.top) +  ")")
+  .call(xAxis);
+
+svg.append("g")
+  .attr("class","axis")
+  .attr("transform","translate("+ margin.left + ","  + (margin.top) +  ")")
+  .call(yAxis);      */
+
+    g.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(xScale))
+     .append("text")
+      .attr("transform", "translate(" + (width + 20) + ", 0 )")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("fill", "#000")
+      .text("logitude");
+
+
+    g.append("g")
+      .attr("class", "axis axis--y")
+      .call(d3.axisLeft(yScale))
+     .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("fill", "#000")
+      .text("latitude");
+
+</script>
+</html>
